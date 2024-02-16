@@ -1,0 +1,23 @@
+# dune exec ./while.exe test.wh
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/aau/.cache/dune/db
+# Workspace root: /Volumes/AAUCode/SW4/SPO/Session2/while
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; installed_env =
+#      map
+#        { "INSIDE_DUNE" :
+#            "/Volumes/AAUCode/SW4/SPO/Session2/while/_build/default"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; instrument_with = []
+#  }
+$ /Users/aau/.opam/default/bin/ocamlc.opt -config > /var/folders/wh/dhw73np90ml8tntw_82wnzb40000gp/T/dune_31401b_output
