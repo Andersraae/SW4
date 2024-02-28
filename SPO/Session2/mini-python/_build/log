@@ -1,4 +1,4 @@
-# dune exec ./minipython.exe test.py
+# dune build minipython.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /Users/aau/.cache/dune/db
@@ -20,4 +20,14 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /Users/aau/.opam/default/bin/ocamlc.opt -config > /var/folders/wh/dhw73np90ml8tntw_82wnzb40000gp/T/dune_ea3249_output
+$ /Users/aau/.opam/default/bin/ocamlc.opt -config > /var/folders/wh/dhw73np90ml8tntw_82wnzb40000gp/T/dune_205f18_output
+$ (cd _build/default && /Users/aau/.opam/default/bin/ocamldep.opt -modules -impl interp.ml) > _build/default/.minipython.eobjs/interp.impl.d
+$ (cd _build/default && /Users/aau/.opam/default/bin/ocamlopt.opt -g -I .minipython.eobjs/byte -I .minipython.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -o .minipython.eobjs/native/interp.cmx -c -impl interp.ml)
+> File "interp.ml", line 55, characters 20-32:
+> 55 | let is_true v = not (is_false v)
+>                          ^^^^^^^^^^^^
+> Error: This expression has type value -> bool
+>        but an expression was expected of type bool
+>   Hint: This function application is partial,
+>   maybe some arguments are missing.
+[2]

@@ -44,9 +44,15 @@ let rec print_value = function
    the empty string, and the empty list are all considered to be
    False, and any other value to be True.
 *)
-let is_false v = assert false (* TODO (question 2) *)
+let is_false v = function
+    | Vnone
+    | Vbool true
+    | Vstring ""
+    | Vlist [||] -> true
+    | Vint n -> n = 0
+    | _ -> false
 
-let is_true v = assert false (* TODO (question 2) *)
+let is_true v = not (is_false v)
 
 (* We only have global functions in Mini-Python *)
 
@@ -68,35 +74,36 @@ let rec expr ctx = function
   | Ecst Cnone ->
       Vnone
   | Ecst (Cstring s) ->
-      Vstring s
+    Vstring s
   (* arithmetic *)
   | Ecst (Cint n) ->
-      assert false (* TODO (question 1) *)
+    Vint (Int64.to_int n)
   | Ebinop (Badd | Bsub | Bmul | Bdiv | Bmod |
             Beq | Bneq | Blt | Ble | Bgt | Bge as op, e1, e2) ->
       let v1 = expr ctx e1 in
       let v2 = expr ctx e2 in
       begin match op, v1, v2 with
-        | Badd, Vint n1, Vint n2 -> assert false (* TODO (question 1) *)
-        | Bsub, Vint n1, Vint n2 -> assert false (* TODO (question 1) *)
-        | Bmul, Vint n1, Vint n2 -> assert false (* TODO (question 1) *)
-        | Bdiv, Vint n1, Vint n2 -> assert false (* TODO (question 1) *)
-        | Bmod, Vint n1, Vint n2 -> assert false (* TODO (question 1) *)
-        | Beq, _, _  -> assert false (* TODO (question 2) *)
-        | Bneq, _, _ -> assert false (* TODO (question 2) *)
-        | Blt, _, _  -> assert false (* TODO (question 2) *)
-        | Ble, _, _  -> assert false (* TODO (question 2) *)
-        | Bgt, _, _  -> assert false (* TODO (question 2) *)
-        | Bge, _, _  -> assert false (* TODO (question 2) *)
+        | Badd, Vint n1, Vint n2 -> (n1 + n2)
+        | Bsub, Vint n1, Vint n2 -> (n1 - n2)
+        | Bmul, Vint n1, Vint n2 -> (n1 * n2)
+        | (Bdiv | Bmod), Vint _, Vint 0 -> error "division by zero"
+        | Bdiv, Vint n1, Vint n2 -> (n1 / n2)
+        | Bmod, Vint n1, Vint n2 -> (n1 mod n2)
+        | Beq, _, _  -> ((v1 - v2) = 0)
+        | Bneq, _, _ -> ((v1 - v2) <> 0)
+        | Blt, _, _  -> ((v1 - v2) < 0)
+        | Ble, _, _  -> ((v1 - v2) <= 0)
+        | Bgt, _, _  -> ((v1 - v2) > 0)
+        | Bge, _, _  -> ((v1 - v2) >= 0)
         | Badd, Vstring s1, Vstring s2 ->
-            assert false (* TODO (question 3) *)
+            (s1 ^ s2)
         | Badd, Vlist l1, Vlist l2 ->
             assert false (* TODO (question 5) *)
         | _ -> error "unsupported operand types"
       end
   | Eunop (Uneg, e1) ->
-      assert false (* TODO (question 1) *)
-  (* Boolean *)
+    (* | Vint n -> Vint (-n) *) assert false
+    (* | _ -> error "unsupported operand types" end *)
   | Ecst (Cbool b) ->
       assert false (* TODO (question 2) *)
   | Ebinop (Band, e1, e2) ->

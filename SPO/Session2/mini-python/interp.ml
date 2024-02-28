@@ -52,7 +52,7 @@ let is_false v = function
     | Vint n -> n = 0
     | _ -> false
 
-let is_true v = not (is_false v)
+let is_true v = not (is_false)
 
 (* We only have global functions in Mini-Python *)
 
@@ -105,7 +105,7 @@ let rec expr ctx = function
     | Vint n -> Vint (-n)
     | _ -> error "unsupported operand types" end
   | Ecst (Cbool b) ->
-      assert false (* TODO (question 2) *)
+      | Vbool b -> 
   | Ebinop (Band, e1, e2) ->
       assert false (* TODO (question 2) *)
   | Ebinop (Bor, e1, e2) ->
