@@ -1,0 +1,8 @@
+(ocamllex
+ (modules lexer))
+(menhir
+ (modules parser))
+(executable
+ (name interp)
+ (promote (until-clean))
+ (flags ()))

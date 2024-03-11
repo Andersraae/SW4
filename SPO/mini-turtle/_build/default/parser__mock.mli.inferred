@@ -1,0 +1,4 @@
+type token = EOF
+val menhir_begin_marker : int
+val xv_prog : Ast.program
+val menhir_end_marker : int

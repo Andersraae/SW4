@@ -1,0 +1,27 @@
+# dune build
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/aau/.cache/dune/db
+# Workspace root: /Volumes/AAUCode/SW4/SPO/test/test
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; installed_env =
+#      map
+#        { "INSIDE_DUNE" : "/Volumes/AAUCode/SW4/SPO/test/test/_build/default"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; instrument_with = []
+#  }
+$ /Users/aau/.opam/default/bin/ocamlc.opt -config > /var/folders/wh/dhw73np90ml8tntw_82wnzb40000gp/T/dune_7c19b4_output
+$ (cd _build/default && /Users/aau/.opam/default/bin/ocamldep.opt -modules -impl interp.ml) > _build/default/.interp.eobjs/interp.impl.d
+$ (cd _build/default && /Users/aau/.opam/default/bin/ocamlc.opt -g -bin-annot -I .interp.eobjs/byte -no-alias-deps -opaque -o .interp.eobjs/byte/interp.cmo -c -impl interp.ml)
+$ (cd _build/default && /Users/aau/.opam/default/bin/ocamlopt.opt -g -I .interp.eobjs/byte -I .interp.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -o .interp.eobjs/native/interp.cmx -c -impl interp.ml)
+$ (cd _build/default && /Users/aau/.opam/default/bin/ocamlopt.opt -g -o interp.exe .interp.eobjs/native/ast.cmx .interp.eobjs/native/parser.cmx .interp.eobjs/native/lexer.cmx .interp.eobjs/native/interp.cmx)
+# Promoting "_build/default/interp.exe" to "interp.exe"

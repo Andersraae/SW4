@@ -1,0 +1,6 @@
+# dune init project test
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/aau/.cache/dune/db
+# Workspace root: /Volumes/AAUCode/SW4/SPO/test
+# Auto-detected concurrency: 8

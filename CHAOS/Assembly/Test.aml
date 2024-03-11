@@ -1,0 +1,21 @@
+.ORIG x3000
+
+; Load the number into R0
+LD R0, NUMBER
+
+; Multiply the number by 6
+ADD R1, R0, R0 ; R1 = R0 + R0 (multiply by 2)
+ADD R1, R1, R1 ; R1 = R1 + R1 (multiply by 4)
+ADD R1, R1, R0 ; R1 = R1 + R0 (multiply by 6)
+
+; Store the result in memory
+ST R1, RESULT
+
+; Halt the program
+HALT
+
+; Data section
+NUMBER  .FILL #5     ; Change this value to the desired number
+RESULT  .BLKW 1
+
+.END
